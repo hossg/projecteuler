@@ -60,18 +60,26 @@ def isRightTruncateable(candidatePrimes,n):
 
 def solution():
 
+    # We are told that there are 11 solutions to this problem, so by experiment we increase the total search space
+    # to 1,000,000 until we confirm that we have 11 solutions.
+
+    # Find all primes that are Right Truncatable
     candidatePrimes=sieve(1000000)
     for i in candidatePrimes:
         if not isRightTruncateable(candidatePrimes,i):
             candidatePrimes[i-2] = 0
     rtp = [x for x in candidatePrimes if x!=0]
 
+
+    # Find all primes that are Left Truncatable
     candidatePrimes=sieve(1000000)
     for i in candidatePrimes:
         if not isLeftTruncateable(candidatePrimes,i):
             candidatePrimes[i-2] = 0
     ltp = [x for x in candidatePrimes if x!=0]
 
+
+    # Find all primes that are in both sets
     truncateablePrimes=[x for x in ltp if x in rtp]
     for i in invalidSingleDigitPrimes:
         truncateablePrimes.remove(i)
