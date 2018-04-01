@@ -7,59 +7,53 @@
 
 import math, itertools, logging
 
-knownPrimes=[]
+# Eratosthenes Primes algorithm
+def sieve(upperlimit):
+    # mark off all multiples of 2 so we can use 2*p as the step for the inner loop
+    l = [2] + [x if x % 2 != 0 else 0 for x in range(3, upperlimit + 1)]
 
-def isPrime(n):
-    if n<2:
-        return False
+    for p in l:
+        if p ** 2 > upperlimit:
+            break
+        elif p:
+            for i in range(p * p, upperlimit + 1, 2 * p):
+                l[i - 2] = 0
 
-    if n==2:
-        return True
+    return l    # rather than return ONLY the primes, return primes and non-primes to allow super-fast, index-based
+                # lookup of primes later on
 
-    if (n%2 == 0):
-        return False
+    # filter out non primes from the list, not really that important i could work with a list full of zeros as well
+    # return [x for x in l if x]
 
-    if n in knownPrimes:
-        return True
+# Produce a list with all circular rotations of an integer
+def rotate(s):
+    l=str(s)
+    x = [int(l[n:] + l[:n]) for n in range(len(l))]
+    return x
 
-    for p in knownPrimes:
-        if (p<n and n%p == 0):
-            return False
-
-    for i in range(2, int(math.sqrt(n))+1):
-        if (n%i == 0):
-            return False
-
-    knownPrimes.append(n)
-    return True
-
-
-
-def solution():
-
+def solution(upto):
+    primes = sieve(upto)
     circularPrimes=[]
-    for x in range (1000000):
-        if isPrime(x):
-            logging.debug('{} is prime'.format(x))
-            isCircularPrime=True
-            for n in itertools.permutations(str(x)):
-                c=int(''.join(n))
-                if(c in knownPrimes):
-                    logging.debug('{} is prime'.format(c))
-                elif (isPrime(c) == False):
-                    isCircularPrime=False
-                    logging.debug('{} is NOT prime'.format(c))
-                else:
-                    logging.debug('{} is prime'.format(c))
-                    knownPrimes.append(c)
 
-            if isCircularPrime:
-                circularPrimes.append(x)
-                logging.debug('{} is CIRCULAR prime'.format(x))
+    for p in [x for x in primes if x!=0]:           # For each prime...
+        isCircularPrime = True                      # assume it's one of a circular group.
+        for n in rotate(p):                         # For each of it's rotated partners...
+            if primes[n-2]==0:                      # check to see if THAT is prime
+                isCircularPrime = False             # and if not, invalidate our assumption.
+                break
+        if isCircularPrime == True:                 # If every one of the circular group is prime, then
+            circularPrimes.append(p)                # we've found a group of circular primes
+
+                                                    # We could optimise this further by pre-checking to see if
+                                                    # a prime is already in the circular primes list, since that
+                                                    # list will be very much smaller than the list of all primes
 
     logging.info('Circular Primes: {}'.format(circularPrimes))
     return len(circularPrimes)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    logging.info('Solution = {}'.format(solution()))
+    solution = solution (1000000)
+    assert (solution==55)
+    logging.info('Solution = {}'.format(solution))
+
