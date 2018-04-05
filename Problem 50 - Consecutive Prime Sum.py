@@ -10,7 +10,7 @@
 # put the expected answer here
 expectedAnswer=123456789
 
-import logging, math, timeit, time#, psutil, platform
+import logging, math, timeit, time, psutil, platform
 
 # Utility function for measuring the performance of solutions
 processtime=0.0
@@ -25,16 +25,16 @@ def stopwatch():
     processtime=ct
     return('Elapsed process time:{}s, Elapsed clock time:{}s'.format(ctElapsed,wtElapsed))
 
-# def getsysteminfo():
-#     p=platform.platform()+' ' +platform.processor()+' Python: '+platform.python_version()
-#     memory=psutil.virtual_memory()
-#     cpuc=psutil.cpu_count()
-#     cpup=psutil.cpu_count(logical=True)
-#     cpuf=psutil.cpu_freq()
-#     cput=psutil.cpu_times_percent(percpu=False)
-#
-#     return 'Platform: {}, Memory: {} Physical CPUs: {}, Logical CPUs: {}, Frequency (MHz): {}, Utilisation: {}'.format\
-#         (p,memory,cpuc,cpup,cpuf,cput)
+def getsysteminfo():
+    p=platform.platform()+' ' +platform.processor()+' Python: '+platform.python_version()
+    memory=psutil.virtual_memory()
+    cpuc=psutil.cpu_count()
+    cpup=psutil.cpu_count(logical=True)
+    cpuf=psutil.cpu_freq()
+    cput=psutil.cpu_times_percent(percpu=False)
+
+    return 'Platform: {}, Memory: {} Physical CPUs: {}, Logical CPUs: {}, Frequency (MHz): {}, Utilisation: {}'.format\
+        (p,memory,cpuc,cpup,cpuf,cput)
 
 # Eratosthenes Primes algorithm
 def sieve(upperlimit, onlyPrimes=False):
@@ -93,7 +93,7 @@ if __name__ == "__main__":
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing
-    #assert (solution == expectedAnswer)
+    assert (solution == expectedAnswer)
     logging.info('Solution = {}'.format(solution))
     logging.info(timetaken)
-    # logging.info('System info: {}'.format(getsysteminfo()))
+    logging.info('System info: {}'.format(getsysteminfo()))
