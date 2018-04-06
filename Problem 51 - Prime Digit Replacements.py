@@ -9,7 +9,7 @@
 # is part of an eight prime value family.
 
 # put the expected answer here
-expectedAnswer=123456789
+expectedAnswer=121313
 
 import logging, math, timeit, time, psutil, platform, os, itertools
 
@@ -27,7 +27,7 @@ def replacedigits(number, replacementdigit, numberofreplacements):
             substitutionString[d-1]=replacementdigit
         substitutionString=''.join(substitutionString)
         # logging.debug(substitutionString)
-        replacementCombinations.append(substitutionString)
+        replacementCombinations.append(int(substitutionString))
     return replacementCombinations
 
 def autoreplacedigits(number, numberofreplacements):
@@ -36,10 +36,7 @@ def autoreplacedigits(number, numberofreplacements):
         replacements.append(replacedigits(number,str(i),numberofreplacements))
     return replacements
 
-def autoautoreplacedigits(number):
-    replacements=[]
-    for i in range(1,len(str(number))+1):
-        replacements.append(autoreplacedigits(number, i))
+
 
 
 # Eratosthenes Primes algorithm
@@ -63,42 +60,31 @@ def sieve(upperlimit, onlyPrimes=False):
         return [x for x in l if x]
 
 
+
 def solution():
-    # just a placeholder for where the solution to the problem will be stored and then returned
-    solution=987654321
+    isPrimes = sieve(1000000, onlyPrimes=False)
+    primes=sieve(1000000,onlyPrimes=True)
 
-    primes=sieve(100000,onlyPrimes=True)
-    isPrimes=sieve(100000,onlyPrimes=False)
-
-    maxPrimeCount=0
-    maxP=0
-    iValue=0
     for p in primes:
         for i in range(1,len(str(p))+1):
             generatedNumbers=autoreplacedigits(p,i)
-
+            generatedNumbers = list(map(list, zip(*generatedNumbers)))      # this just transposes our list of lists
+                                                                            # our function varies the digits over a list
+                                                                            # of varying positional substitutions; we
+                                                                            # want it the other way around
             for t in generatedNumbers:
                 primeCount = 0
-                for s in t:
-                    # logging.info(s)
-                    n=int(s)
-                    if isPrimes[n-2] != 0:
+                smallestPrime=t[-1] # start with the biggest and then replace with smaller primes
+                for n in t:
+                    if isPrimes[n-2] != 0 and len(str(n))==len(str(t[-1])):  # a hack - we only want to discount early
+                                                                             # numbers where there may be leading zeros
+                                                                             # dropped in the conversion to ints
                         primeCount+=1
-                if primeCount==7: #>maxPrimeCount:
-                    maxPrimeCount=primeCount
-                    maxP=p
-                    iValue=i
-    logging.info('Smallest prime in family: {} Family count: {} i-value: {}'.format((maxP),maxPrimeCount,iValue))
+                        smallestPrime=min(smallestPrime,n)
+                if primeCount==8: #>maxPrimeCount:
+                    logging.debug(t)
+                    return smallestPrime
 
-
-
-    replacements = autoreplacedigits(123,2)
-    for item in replacements:
-        logging.debug(item)
-
-
-
-    return solution
 
 
 # Utility function for measuring the performance of solutions
@@ -131,7 +117,7 @@ if __name__ == "__main__":
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing
-    #assert (solution == expectedAnswer)
+    assert (solution == expectedAnswer)
     logging.info('Solution = {}'.format(solution))
     logging.info(timetaken)
     logging.info('System info: {}'.format(getsysteminfo()))
