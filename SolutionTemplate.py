@@ -3,7 +3,7 @@
 # put the expected answer here
 expectedAnswer=123456789
 
-import logging, math, timeit, time, psutil, platform
+import logging, math, timeit, time, psutil, platform, os
 
 # Utility function for measuring the performance of solutions
 processtime=0.0
@@ -44,6 +44,7 @@ def solution():
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing
