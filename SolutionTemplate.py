@@ -5,6 +5,17 @@ expectedAnswer=123456789
 
 import logging, math, timeit, time, psutil, platform, os
 
+
+def solution():
+    # just a placeholder for where the solution to the problem will be stored and then returned
+    solution=987654321
+
+    #implement solution to the problem here
+    time.sleep(1)
+
+    return solution
+
+
 # Utility function for measuring the performance of solutions
 processtime=0.0
 walltime=0.0
@@ -28,19 +39,6 @@ def getsysteminfo():
 
     return 'Platform: {}, Memory: {} Physical CPUs: {}, Logical CPUs: {}, Frequency (MHz): {}, Utilisation: {}'.format\
         (p,memory,cpuc,cpup,cpuf,cput)
-
-
-def solution():
-    # just a placeholder for where the solution to the problem will be stored and then returned
-    solution=987654321
-
-    #implement solution to the problem here
-    time.sleep(1)
-
-
-
-    return solution
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
