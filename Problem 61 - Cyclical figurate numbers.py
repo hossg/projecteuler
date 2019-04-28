@@ -18,9 +18,11 @@
 # pentagonal, hexagonal, heptagonal, and octagonal, is represented by a different number in the set.
 
 # put the expected answer here
-expectedAnswer=123456789
+expectedAnswer=28684
 
+import logging, math, timeit, time, platform, os,itertools , psutil
 
+# some generator functions to create the polygonal numbers we want
 
 def triangular():
     n=0
@@ -58,82 +60,85 @@ def octagonal():
         n+=1
         yield n*(3*n-2)
 
+# an iterator to give us only 4-digit numbers
 def four_digit(g):
     return itertools.takewhile(lambda x: len(str(x))==4, itertools.dropwhile(lambda x: len(str(x))<4,g))
 
-def last_two_first_two(d1,d2):
+# simple function to confirm cyclicity
+def is_cyclic(d1,d2):
     if d1 % 100 == int(d2/100):
         return True
     else:
         return False
 
-def is_cyclic(d1,d2):
-    if last_two_first_two(d1,d2) or last_two_first_two(d2,d1):
-        return True
-    else:
-        return False
-
-def find_cyclics(l1,l2):
-    cyclics=[]
-    for i1 in l1:
-        for i2 in l2:
-            if is_cyclic(i1,i2):
-                cyclics.append(i1)
-    return set(cyclics)
-
-
-
-import logging, math, timeit, time, platform, os,itertools #, psutil
-
+# given a number and a set, return the subset that is cyclic with the provided number
+def get_cyclic_subset(number, starting_set):
+    results = []
+    for n in starting_set:
+        if is_cyclic(number,n):
+            results.append(n)
+    return results
 
 def solution():
 
-    t=octagonal()
-    # for i in range(10):
-    #     print(t.__next__())
-    tri = list(four_digit(hexagonal()))
-    squ = list(four_digit(square()))
-    pen = list(four_digit(pentagonal()))
-    hex = list(four_digit(hexagonal()))
-    hep = list(four_digit(heptagonal()))
-    oct = list(four_digit(octagonal()))
+    # prepare our sets of polygonals
+    tri = {'tri': sorted(list(four_digit(triangular())))}
+    squ = {'squ': sorted(list(four_digit(square())))}
+    pen = {'pen': sorted(list(four_digit(pentagonal())))}
+    hex = {'hex': sorted(list(four_digit(hexagonal())))}
+    hep = {'hep': sorted(list(four_digit(heptagonal())))}
+    oct = {'oct': sorted(list(four_digit(octagonal())))}
 
-    sets={'tri': tri, 'squ': squ, 'pen': pen, 'hex': hex, 'hep': hep,'oct': oct}
+    sets = {'tri': tri, 'squ': squ, 'pen': pen, 'hex': hex, 'hep': hep, 'oct': oct}
 
-    # print(len(oct))
-    # print(len(hep))
-    # print(len(hex))
-    # print(len(pen))
-    # print(len(squ))
-    # print(len(tri))
-    #
-    # print(hep)
-    #
-    # print(find_cyclics(oct,hep))
-    # print(find_cyclics(oct, hex))
-    # print(find_cyclics(oct, pen))
-    # print(find_cyclics(oct, squ))
-    # print(find_cyclics(oct, tri))
-    # print(find_cyclics(hep, oct))
+    # note: the dict-based naming is a convenience in case we want to reverse the process at any point and identify
+    # which polygonal a particular number might be.  Unused capability in the solution of the problem.
 
-    for iname,i in sets.items():
-        for jname,j in sets.items():
-            if j!=i:
-                print('{} > {} = {}'.format(iname,jname,find_cyclics(i,j)))
+    # first assemble the different ordering/sequences of possible polygonal numbers
+    combos = itertools.permutations(sets.keys(),6)
+    polygonal_sequences=set()
+    for n,i in enumerate(combos):
+        if(i[0]=='oct'): # by picking only those that start with 'oct' (or any other fixed starting point) we eliminate duplicates that have the same (circluar) ordering/sequence
+            polygonal_sequences.add(i)
 
+    # for each sequence of polygonals
+    # for each polygonal,
+    # for each number, find the set of numbers from the next polygonal that are cyclic with it,
+    # and for each of these, rinse and repeat
 
+    results=[]
+    for sequence in polygonal_sequences:
+        seq = list(sequence)
+        logging.debug("Checking sequence {}".format(seq))
+        set0 = sets[seq[0]][seq[0]]
+        for n0 in set0:
+            set1 = get_cyclic_subset(n0,sets[seq[1]][seq[1]])
 
+            for n1 in set1:
+                set2 = get_cyclic_subset(n1, sets[seq[2]][seq[2]])
 
-    # print(last_two_first_two(1234, 3456))
-    # print(last_two_first_two(1234, 3356))
+                for n2 in set2:
+                    set3 = get_cyclic_subset(n2, sets[seq[3]][seq[3]])
 
+                    for n3 in set3:
+                        set4 = get_cyclic_subset(n3, sets[seq[4]][seq[4]])
+
+                        for n4 in set4:
+                            set5 = get_cyclic_subset(n4, sets[seq[5]][seq[5]])
+
+                            for n5 in set5:
+                                if is_cyclic(n5,n0):    # having got to this point, we need to confirm the last number is cyclic with the first
+                                    r = [n0, n1, n2, n3, n4, n5]
+                                    results=r
+                                    break
+
+    #and calculate the sum of the cyclic sequence
+    sum = 0
+    for i in results:
+        sum+=i
 
     # just a placeholder for where the solution to the problem will be stored and then returned
-    solution=987654321
-
-    #implement solution to the problem here
-    time.sleep(1)
-
+    solution=sum
     return solution
 
 
@@ -150,16 +155,16 @@ def stopwatch():
     processtime=ct
     return('Elapsed process time:{}s, Elapsed clock time:{}s'.format(ctElapsed,wtElapsed))
 
-# def getsysteminfo():
-#     p=platform.platform()+' ' +platform.processor()+' Python: '+platform.python_version()
-#     memory=psutil.virtual_memory()
-#     cpuc=psutil.cpu_count()
-#     cpup=psutil.cpu_count(logical=True)
-#     cpuf=psutil.cpu_freq()
-#     cput=psutil.cpu_times_percent(percpu=False)
-#
-#     return 'Platform: {}, Memory: {} Physical CPUs: {}, Logical CPUs: {}, Frequency (MHz): {}, Utilisation: {}'.format\
-#         (p,memory,cpuc,cpup,cpuf,cput)
+def getsysteminfo():
+    p=platform.platform()+' ' +platform.processor()+' Python: '+platform.python_version()
+    memory=psutil.virtual_memory()
+    cpuc=psutil.cpu_count()
+    cpup=psutil.cpu_count(logical=True)
+    cpuf=psutil.cpu_freq()
+    cput=psutil.cpu_times_percent(percpu=False)
+
+    return 'Platform: {}, Memory: {} Physical CPUs: {}, Logical CPUs: {}, Frequency (MHz): {}, Utilisation: {}'.format\
+        (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
@@ -167,7 +172,7 @@ if __name__ == "__main__":
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing
-    #assert (solution == expectedAnswer)
+    assert (solution == expectedAnswer)
     logging.info('Solution = {}'.format(solution))
     logging.info(timetaken)
-    # logging.info('System info: {}'.format(getsysteminfo()))
+    logging.info('System info: {}'.format(getsysteminfo()))
