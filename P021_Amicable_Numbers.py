@@ -9,10 +9,12 @@
 
 import os
 import logging
+expectedAnswer = 31626
+
 logger=logging.getLogger(os.path.basename(__file__))
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
-divisors = __import__("Problem 12 - Highly Divisible Triangular Number")
+divisors = __import__("P012_Highly_Divisible_Triangular_Number")
 
 def sumDivisors(N):
     d=divisors.divisors(N)

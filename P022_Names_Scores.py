@@ -9,6 +9,8 @@
 
 import os
 import logging
+expectedAnswer = 871198282
+
 logger=logging.getLogger(os.path.basename(__file__))
 logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 

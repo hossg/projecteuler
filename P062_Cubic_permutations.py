@@ -28,7 +28,7 @@ def solution():
         cubes.append(cubeDigits)                # and record this
         c=cubes.count(cubeDigits)               # and see how many times we've had this set of digits... is it 5 yet?
         if c>=3:
-            logging.info('Cube with digits {} appears {} times so far'.format(cubeDigits,c))
+            logging.debug('Cube with digits {} appears {} times so far'.format(cubeDigits,c))
         if c==5:
             solution=cubes.index(cubeDigits)**3 #  we want the index of the first number to
                                                 #  produce this cube set, and hence the smallest
@@ -65,7 +65,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

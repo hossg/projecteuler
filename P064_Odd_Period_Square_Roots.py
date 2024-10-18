@@ -14,10 +14,9 @@ def solution():
 
 def get_a(n):
     next_a = math.floor(math.sqrt(n))
-    answer = next_a + (1/(1/(math.sqrt(n) - next_a))
-    answer = next_a + (1/(math.sqrt(n)+next_a)/(n+next_a^2)
+    answer = next_a + (1/(1/(math.sqrt(n) - next_a)))
+    answer = next_a + (1/(math.sqrt(n)+next_a)/(n+next_a^2))
 
-def get_a(n)
 
 # Utility function for measuring the performance of solutions
 processtime=0.0

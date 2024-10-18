@@ -15,31 +15,39 @@
 
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+expectedAnswer = 837799
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
 
 def collatz(startingNumber):
-    n=startingNumber
+    n = startingNumber
     while True:
         yield n
-        if n==1:
+        if n == 1:
             break
         if n % 2 == 0:
-            n=int(n/2)
+            n = int(n / 2)
         else:
             n = 3 * n + 1
 
-def solution():
-    maxSequence=(1,1)
-    for i in range(2,1000000):
-        l=len([c for c in collatz(i)])
-        if l > maxSequence[1]:
-            maxSequence=(i,l)
-        logger.debug("{} : {} terms".format(i,l))  # disabled for large runs for performance reasons
 
-    logger.info("max sequence length: collatz({}): {} items".format(maxSequence[0],maxSequence[1]))
-    assert(maxSequence[0]==837799)
+def solution():
+    maxSequence = (1, 1)
+    for i in range(2, 1000000):
+        l = len([c for c in collatz(i)])
+        if l > maxSequence[1]:
+            maxSequence = (i, l)
+        logger.debug("{} : {} terms".format(
+            i, l))  # disabled for large runs for performance reasons
+
+    logger.info("max sequence length: collatz({}): {} items".format(
+        maxSequence[0], maxSequence[1]))
+    assert (maxSequence[0] == 837799)
     return maxSequence[0]
+
 
 # TODO - need to benchmark this (and all other solutions) and compare with canonical versions available elsewhere
 

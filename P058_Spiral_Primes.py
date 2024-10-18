@@ -57,6 +57,22 @@ def sieve(upperlimit):
                 # lookup of primes later on
 
 
+
+import numba
+import numpy
+import timeit
+import datetime 
+
+@numba.jit(nopython = True, parallel = True, fastmath = True, forceobj = False)
+def sieve2(n: int) -> numpy.ndarray:
+    primes = numpy.full(n, True)
+    primes[0], primes[1] = False, False
+    for i in numba.prange(2, int(numpy.sqrt(n) + 1)):
+        if primes[i]:
+            primes[i*i::i] = False
+    return numpy.flatnonzero(primes)
+
+
 import subprocess
 
 def solution():
@@ -64,16 +80,16 @@ def solution():
     solution=987654321
 
     max_square_size=40000 # increased this by trial and error until I generated a big enough square
-    logging.info('Preparing primes')
+    logging.debug('Preparing primes')
 
     # Rather than use a home-built sieve method in Python, make use of primesieve library
     # I did try to install pyprimesieve with a python/native interface but couldnt get it to install on my Mac
     # Instead just do an ugly hack and call the tool via the command line and capture the output
-    x = subprocess.run(['primesieve', '-p', str(max_square_size**2)], stdout=subprocess.PIPE).stdout.decode('utf-8')
-    y = x.split('\n')   # primesieve returns one prime per line
-    z = y[:-1]          # and an irritating additional newline at the end
-    primes = [int(n) for n in z]
-
+    # x = subprocess.run(['primesieve', '-p', str(max_square_size**2)], stdout=subprocess.PIPE).stdout.decode('utf-8')
+    # y = x.split('\n')   # primesieve returns one prime per line
+    # z = y[:-1]          # and an irritating additional newline at the end
+    # primes = [int(n) for n in z]
+    primes = sieve2(max_square_size**2)
     # now generate a sparse array to contain the primes - this massively optimises prime-lookup speed compared with
     # simply doing  if x in y list lookup
     max_prime = primes[-1]
@@ -82,12 +98,12 @@ def solution():
         sparse_primes[i]=i
 
     prime_diagonals=[]
-    logging.info('Looking for prime diagonals primes')
+    logging.debug('Looking for prime diagonals primes')
     for i in range(3,max_square_size,2):
         prime_diagonals+=(get_prime_diagonals(i,sparse_primes))
         n_diagonals = 2 * i - 1
         prime_ratio=len(prime_diagonals)/n_diagonals
-        logging.info('Square Size: {}, Prime Ratio: {}, Primes: {}'.format(i,prime_ratio,prime_diagonals))
+        logging.debug('Square Size: {}, Prime Ratio: {}, Primes: {}'.format(i,prime_ratio,prime_diagonals))
         if prime_ratio < 0.1:
             solution = i
             break
@@ -120,7 +136,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

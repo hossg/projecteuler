@@ -22,7 +22,7 @@ def solution():
             d=digits(y)
             if d==n:
                 ncount+=1
-                logging.info('{} has {} digits and is a {} power'.format(y,d,n))
+                logging.debug('{} has {} digits and is a {} power'.format(y,d,n))
 
             if d>n:
                 break
@@ -55,7 +55,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

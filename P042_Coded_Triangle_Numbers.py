@@ -11,6 +11,8 @@
 
 import csv, math, logging
 
+expectedAnswer =162
+
 alphabet='ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
 def getAlphaValue(x):

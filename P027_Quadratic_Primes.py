@@ -31,6 +31,8 @@
 
 import logging, os, math
 
+expectedAnswer = -59231
+
 def getPrimesLessThan(N):
 
 

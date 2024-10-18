@@ -74,13 +74,13 @@ def solution():
 
     #implement solution to the problem here
 
-    logging.info('{} is triangular:{}'.format(Tn(285),isTriangular(Tn(285))))
-    logging.info('{} is pentangular:{}'.format(Pn(165),isPentangular(Pn(165))))
-    logging.info('{} is hexangular:{}'.format(Hn(143),isHexangular(Hn(143))))
+    logging.debug('{} is triangular:{}'.format(Tn(285),isTriangular(Tn(285))))
+    logging.debug('{} is pentangular:{}'.format(Pn(165),isPentangular(Pn(165))))
+    logging.debug('{} is hexangular:{}'.format(Hn(143),isHexangular(Hn(143))))
 
     Hs=[]
     HsPs=[]
-    logging.info('Searching for Hexagonal numbers')
+    logging.debug('Searching for Hexagonal numbers')
     for i in range(100000):
         H=Hn(i)
         Hs.append(H)
@@ -91,7 +91,7 @@ def solution():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing

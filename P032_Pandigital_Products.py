@@ -11,6 +11,7 @@
 
 import logging, itertools, math
 
+expectedAnswer = 45228
 
 def isPandigitalTriplet(f1, f2, p):
 
@@ -71,15 +72,15 @@ def solution():
 
                 f = a * b
                 if isPandigitalTriplet(a, b, f):
-                    logging.info("{} * {} = {}".format(a,b,f))
+                    logging.debug("{} * {} = {}".format(a,b,f))
                     results.append(f)
 
     results = set(results)
     total=0
     for n in results:
         total+=n
-    logging.info('Solution = {}'.format(total))
-    assert (total==45228)
+    logging.debug('Solution = {}'.format(total))
+    assert (total==expectedAnswer)
     return total
 
 

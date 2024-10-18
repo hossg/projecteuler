@@ -9,6 +9,8 @@
 
 import logging
 
+expectedAnswer = 5482660
+
 def pentagon(n):
     return n*(3*n-1)/2
 
@@ -26,13 +28,13 @@ def solution():
             if (pk-pj) in pentagons[:k]:    # we'll search for the difference first, since it's guaranteed to have a
                                             # smaller search space than the sum, so we can discard failures earlier
                 if (pk+pj) in pentagons:
-                    logging.info('Found matching pentagonal numbers: {},{}'.format(pj,pk))
+                    logging.debug('Found matching pentagonal numbers: {},{}'.format(pj,pk))
                     return (pk-pj)          # nor obvious why we should return the first one we find, though this
                                             # turns out to be correct!
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution = solution()
     assert (solution == 5482660)
     logging.info('Solution = {}'.format(solution))

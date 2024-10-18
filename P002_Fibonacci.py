@@ -6,21 +6,27 @@
 # By considering the terms in the Fibonacci sequence whose values do not exceed four million,
 # find the sum of the even-valued terms..
 
+expectedAnswer = 4613732
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
 
 def yieldFibonacci():
-    a,b = 1,2   # The first two numbers in "this" Fibonacci series (normally, the first two would be 0,1 or 1,1)
+    a, b = 1, 2  # The first two numbers in "this" Fibonacci series (normally, the first two would be 0,1 or 1,1)
     while True:
         yield a
-        a,b = b,a+b
+        a, b = b, a + b
+
 
 def yieldEvenFibonacci():
     for i in yieldFibonacci():
         if i % 2 == 0:
             yield i
+
 
 def solution():
     total = 0
@@ -33,8 +39,9 @@ def solution():
             break
 
     logger.info("solution = {} ".format(total))
-    assert(total==4613732)
+    assert (total == 4613732)
     return total
+
 
 if __name__ == "__main__":
     solution()

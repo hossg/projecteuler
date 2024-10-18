@@ -16,6 +16,8 @@
 
 import logging
 
+expectedAnswer=73682
+
 coins=[1,2,5,10,20,50,100,200]
 
 cents = 200
@@ -72,3 +74,6 @@ if __name__ == "__main__":
     logging.info(countWays(5))
     logging.info(countWays(10))
     logging.info(countWays(200))
+
+def solution():
+    return countWays(200)

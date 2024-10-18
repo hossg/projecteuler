@@ -7,7 +7,7 @@
 # NOTE: 2, 3, 5, and 7 are not considered to be truncatable primes.
 
 import logging
-
+expectedAnswer=748317
 
 def truncateLeft(n):
     s=str(n)
@@ -83,8 +83,8 @@ def solution():
     truncateablePrimes=[x for x in ltp if x in rtp]
     for i in invalidSingleDigitPrimes:
         truncateablePrimes.remove(i)
-    logging.info('After left truncating primes: {}'.format(truncateablePrimes))
-    logging.info('{} truncatable primes found.'.format(len(truncateablePrimes)))
+    logging.debug('After left truncating primes: {}'.format(truncateablePrimes))
+    logging.debug('{} truncatable primes found.'.format(len(truncateablePrimes)))
     total = 0
     for i in truncateablePrimes:
         total += i
@@ -92,7 +92,7 @@ def solution():
 
 invalidSingleDigitPrimes=[2,3,5,7]
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution=solution()
     assert (solution==748317)
     logging.info('Solution = {}'.format(solution))

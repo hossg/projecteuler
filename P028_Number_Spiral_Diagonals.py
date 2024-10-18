@@ -16,6 +16,7 @@
 # spiral(5) = starts at 9 + (5-1), then has numbers (5-1) apart, and so ends at 9 + (4*4) = 9 + 16 = 25
 # spiral(7) = starts at 25 + (7-1), then  has numbers (7-1) apart
 
+expectedAnswer = 669171001
 
 def spiral(l):
     if l==1:
@@ -31,11 +32,13 @@ def spiral(l):
 
     return (end, sum)
 
-for l in range(1,7,2):
-    print('{} - {}'.format(l,spiral(l)))
+# for l in range(1,7,2):
+#     print('{} - {}'.format(l,spiral(l)))
 
-print(spiral(1001))
+# print(spiral(1001))
 
 
-assert spiral(1001)==669171001
+assert spiral(1001)[1]==669171001
 
+def solution():
+    return spiral(1001)[1]

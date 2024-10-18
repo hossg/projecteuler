@@ -7,20 +7,25 @@
 
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+expectedAnswer = 648
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 import math
 
+
 def solution():
     n = math.factorial(100)
-    s=str(n)
+    s = str(n)
     sum = 0
     for c in s:
         sum += int(c)
-    assert(sum==648)
+    assert (sum == 648)
     logger.info('solution = {}'.format(sum))
     return sum
+
 
 if __name__ == "__main__":
     solution()

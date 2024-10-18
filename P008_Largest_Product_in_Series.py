@@ -23,11 +23,13 @@
 #
 # Find the thirteen adjacent digits in the 1000-digit number that have the greatest product. What is the value of this
 #  product?
-
+expectedAnswer = 23514624000
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 thousandDigits = "\
 73167176531330624919225119674426574742355349194934\
@@ -52,28 +54,32 @@ thousandDigits = "\
 71636269561882670428252483600823257530420752963450\
 "
 
-def subStringProduct(string,start,length):
-    subString = string[start:length+start]
+
+def subStringProduct(string, start, length):
+    subString = string[start:length + start]
     product = 1
     for i in subString:
         product *= int(i)
 
     return product
 
+
 def maxProduct(string, length):
     maxProduct = 0
-    for start in range(0,len(string)-length):
-        product = subStringProduct(string,start,length)
+    for start in range(0, len(string) - length):
+        product = subStringProduct(string, start, length)
         if product > maxProduct:
             maxProduct = product
     return maxProduct
 
+
 def solution():
-    assert(maxProduct(thousandDigits,4) == 5832)
-    s=maxProduct(thousandDigits,13)
+    assert (maxProduct(thousandDigits, 4) == 5832)
+    s = maxProduct(thousandDigits, 13)
     assert (s == 23514624000)
     logger.info("solution = {}".format(s))
     return s
+
 
 if __name__ == "__main__":
     solution()

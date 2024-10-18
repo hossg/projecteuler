@@ -7,8 +7,10 @@ import os
 import logging
 import timeit
 
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
 
 def yieldNextMultipleOf3or5():
     candidate = 0
@@ -19,6 +21,7 @@ def yieldNextMultipleOf3or5():
             yield candidate
         candidate += 1
 
+
 def solution():
     total = 0
     for i in yieldNextMultipleOf3or5():
@@ -28,12 +31,14 @@ def solution():
         else:
             break
 
-    assert(total==233168)
+    assert (total == 233168)
     return total
 
 
+expectedAnswer = 233168
+
 if __name__ == "__main__":
     logger.info("Solution = {}".format(solution()))
-    n=10000
-    t=timeit.timeit('solution()', number=n, globals=globals())
-    logger.info("Time taken = {} ms".format(t*1000/n))
+    n = 10000
+    t = timeit.timeit('solution()', number=n, globals=globals())
+    logger.info("Time taken = {} ms".format(t * 1000 / n))

@@ -17,44 +17,53 @@
 # What is the value of the first triangle number to have over five hundred divisors?
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+expectedAnswer = 76576500
+
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 import math
 
+
 def triangle(N):
-    if N==1: return 1
-    return N+triangle(N-1)
+    if N == 1: return 1
+    return N + triangle(N - 1)
+
 
 def triangleGenerator():
-    lastT=1
-    n=1
+    lastT = 1
+    n = 1
     while True:
         yield lastT
         n += 1
         lastT += n
 
+
 def divisors(N):
-    divisors=[]
-    divisors += [1,N]
-    limit=int(math.sqrt(N))+1
-    for n in range(2,limit):
-        x = divmod(N,n)
-        if x[1]==0:
-            divisors += [n,x[0]]
-    return(sorted(set(divisors))) # set() to ensure uniqueness, sorted() unnecessary but for presentational
-                                  #   purposes
+    divisors = []
+    divisors += [1, N]
+    limit = int(math.sqrt(N)) + 1
+    for n in range(2, limit):
+        x = divmod(N, n)
+        if x[1] == 0:
+            divisors += [n, x[0]]
+    return (
+        sorted(set(divisors))
+    )  # set() to ensure uniqueness, sorted() unnecessary but for presentational
+    #   purposes
+
 
 def solution():
     for t in triangleGenerator():
-        d=divisors(t)
-        l=len(d)
-        logger.debug("{} : {}, {}".format(t,l,divisors(t)))
-        if l>500:
-            assert(t==76576500)
+        d = divisors(t)
+        l = len(d)
+        logger.debug("{} : {}, {}".format(t, l, divisors(t)))
+        if l > 500:
+            assert (t == 76576500)
             logger.info('solution = '.format(t))
             return t
-
 
 
 if __name__ == "__main__":

@@ -1,36 +1,40 @@
 # A runner that runs all of the Project Euler solutions
 #
-# This looks for all files in the current folder that begin Problem XX and then executes the problemXX() method therein
+# This looks for all files in the current folder that begin PXXX and then executes the solution() method therein
 
 import timeit
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+import re
+import glob
+
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 logger.info('Project Euler - Project Runner')
 # get the list of files to play with and sort them numerically rather than alphabetically
-import glob
-
-files = glob.glob("Problem*.py")
-def fileSort(name):
-    return int(name.split()[1])
-
-files=sorted(files, key = fileSort)
-
+files = glob.glob("P0*.py")
 logger.info("Found {} problems to run".format(len(files)))
-methodNames=[]
-for k,i in enumerate(files):
-    j=i.split()
-    methodNames.append((j[0]+j[1]).lower())
-    j=i.split(sep='.')
-    files[k]=j[0]
 
-# files=['Problem 25 - 1000-Digit Fibonacci number', 'Problem 1 - MultiplesOf3and5']
-# methodNames=['problem25','problem1']
-for k,i in enumerate(files):
-    logger.info("Loading module: {}".format(i))
-    f=__import__(i)
-    result = f.solution()
-    logger.info("Solution to {} = {}".format(i,result))
+modules = []
+for k, i in enumerate(files):
+    j = i.split(sep='.')
+    modules.append(j[0])
 
+modules = sorted(modules)
+# for m in modules:
+#     print(m)
+
+incorrectString = '\x1b[31;1mINCORRECT\x1b[0m'
+correctString = '\x1b[32;1mCORRECT\x1b[0m'
+
+# modules = ['P025_1000-Digit_Fibonacci_number', 'P001_MultiplesOf3and5']
+for m in modules[58:]:
+    logger.info(f"Loading module: {m}")
+    f = __import__(m)
+    expectedAnswer = f.expectedAnswer
+    solution = f.solution()
+    logger.info(
+        f"Solution to {m} = {solution} {correctString if solution == expectedAnswer else incorrectString}"
+    )

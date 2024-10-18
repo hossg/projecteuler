@@ -17,6 +17,8 @@
 
 import os
 import logging
+
+expectedAnswer = 983
 logger=logging.getLogger(os.path.basename(__file__))
 
 def solution():
@@ -27,6 +29,7 @@ def solution():
         if l > max:
             max = i
     logger.info("solution = {}".format(max))
+    return max
 
 
 def recurringCycle(d):

@@ -10,7 +10,7 @@
 
 
 import logging, math
-
+expectedAnswer=210
 s='0.'
 for i in range(1,1000000):
     s+=str(i)
@@ -23,7 +23,7 @@ def solution():
     for n in range(6):
         digit=d(int(math.pow(10,n)))
         ds.append(digit)
-        logging.info('d{}={}'.format(n+1,digit))
+        logging.debug('d{}={}'.format(n+1,digit))
 
     product=1
     for i in ds:
@@ -32,7 +32,7 @@ def solution():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution=solution()
     assert (solution==210)
     logging.info('Solution = {}'.format(solution))

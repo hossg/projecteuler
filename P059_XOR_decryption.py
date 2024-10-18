@@ -69,15 +69,15 @@ def solution(): # an array of ints representing the ciphertext
                     if k in possible_key_codes[n]:         # and if the character is still in the list of possibles
                         possible_key_codes[n].remove(k)    # then remove it from the list of possibles
 
-    logging.info('Possible key codes, (letters 1,2,3): {}'.format(possible_key_codes))
+    logging.debug('Possible key codes, (letters 1,2,3): {}'.format(possible_key_codes))
 
     # any combination of those codes could form the key, so let's test them all and see if any contain English
     for k in itertools.product(*possible_key_codes):
-        logging.info('Testing key: {}'.format(ints_to_string(k)))
+        logging.debug('Testing key: {}'.format(ints_to_string(k)))
         plaintext=code_decode_ints(cipher, k)
         if ' the ' in plaintext:
-            logging.info('Found key: {}'.format(ints_to_string(k)))
-            logging.info('Plaintext: {}'.format(plaintext))
+            logging.debug('Found key: {}'.format(ints_to_string(k)))
+            logging.debug('Plaintext: {}'.format(plaintext))
             ints = string_to_ints(plaintext)
             sum_of_ints = sum(ints)
             solution = sum_of_ints
@@ -111,7 +111,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

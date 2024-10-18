@@ -7,6 +7,8 @@
 
 import math, itertools, logging
 
+expectedAnswer = 55
+
 # Eratosthenes Primes algorithm
 def sieve(upperlimit):
     # mark off all multiples of 2 so we can use 2*p as the step for the inner loop
@@ -31,7 +33,7 @@ def rotate(s):
     x = [int(l[n:] + l[:n]) for n in range(len(l))]
     return x
 
-def solution(upto):
+def solve(upto):
     primes = sieve(upto)
     circularPrimes=[]
 
@@ -48,12 +50,15 @@ def solution(upto):
                                                     # a prime is already in the circular primes list, since that
                                                     # list will be very much smaller than the list of all primes
 
-    logging.info('Circular Primes: {}'.format(circularPrimes))
+    logging.debug('Circular Primes: {}'.format(circularPrimes))
     return len(circularPrimes)
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    solution = solution (1000000)
+    solution = solve (1000000)
     assert (solution==55)
     logging.info('Solution = {}'.format(solution))
+
+def solution():
+    return solve(1000000)
 

@@ -15,7 +15,7 @@
 # 6 digit total as our simple upper limit.
 
 import timeit, logging
-
+expectedAnswer = 443839
 limit=354294
 
 

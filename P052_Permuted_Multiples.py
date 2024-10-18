@@ -21,7 +21,7 @@ def solution():
         d5 = digits(5*i)
         d6 =digits(6*i)
         if d1==d2 and d2==d3 and d3==d4 and d4==d5 and d5==d6:
-            logging.info('{} {} {} {} {} {}'.format(i,2*i,3*i,4*i,5*i,6*i))
+            logging.debug('{} {} {} {} {} {}'.format(i,2*i,3*i,4*i,5*i,6*i))
             solution=i
 
 
@@ -53,7 +53,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

@@ -15,6 +15,7 @@
 
 import itertools, logging
 
+expectedAnswer = 16695334890
 
 def generateTripletsDivisibleBy(n):
     triplets=[]
@@ -63,7 +64,7 @@ def solution():
     candidates = [x for x in candidates if int(x[2:5]) % 3 == 0]
     candidates = [x for x in candidates if int(x[1:4]) % 2 == 0]
 
-    logging.info(candidates)
+    logging.debug(candidates)
 
     total=0
     for item in candidates:
@@ -73,7 +74,7 @@ def solution():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution = solution()
     assert (solution == 16695334890)
     logging.info('Solution = {}'.format(solution))

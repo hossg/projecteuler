@@ -12,37 +12,43 @@
 #
 # We don't need to test for primality since by repeating the process we will decompose all
 # numbers into their prime factors
-
+expectedAnswer = 6857
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
-def isFactor(N,n):
-    if N % n ==0:
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+
+def isFactor(N, n):
+    if N % n == 0:
         return True
     else:
         return False
 
-def factorize(N, startFrom = 2):
-    logger.debug("factoring {}, starting from {}".format(N,startFrom))
-    factors=[]
+
+def factorize(N, startFrom=2):
+    logger.debug("factoring {}, starting from {}".format(N, startFrom))
+    factors = []
     i = startFrom
 
     while i <= N:
-        if isFactor(N,i):
+        if isFactor(N, i):
             factors.append(i)
-            factors += factorize(int(N/i),i)
+            factors += factorize(int(N / i), i)
             break
         i += 1
     return factors
+
 
 def solution():
     factors = factorize(600851475143)
     m = max(factors)
     logger.info("solution = {}".format(m))
-    assert(m==6857)
+    assert (m == 6857)
     return m
+
 
 if __name__ == "__main__":
     solution()

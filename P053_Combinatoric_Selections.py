@@ -21,7 +21,7 @@ def solution():
         for r in range(n + 1):
             if C(n, r) > 1000000:
                 largeCombinations += 1
-                logging.info('Found C({},{}) = {}'.format(n, r, C(n, r)))
+                logging.debug('Found C({},{}) = {}'.format(n, r, C(n, r)))
 
     solution=largeCombinations
 
@@ -43,7 +43,7 @@ def stopwatch():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 #    logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

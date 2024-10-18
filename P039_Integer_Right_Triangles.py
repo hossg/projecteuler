@@ -10,7 +10,7 @@
 # and then multiplying by a factor K to find non-primitive solutions
 
 import logging, math
-
+expectedAnswer=840
 
 # Generate enough triples (as long as we create one side of the triangle to be up to 1000, we know we won't need to go
 # higher
@@ -26,7 +26,7 @@ def solution():
 
                 p=a+b+c
                 if p<1000:
-                    logging.info('Found a valid triple: {} = {}+{}+{}'.format(p,a, b, c))
+                    logging.debug('Found a valid triple: {} = {}+{}+{}'.format(p,a, b, c))
                     solutions[p].append((p,a,b,c))
 
     # Now scan through the solutions for every perimeter we've found, to find the one with the most solutions
@@ -36,11 +36,11 @@ def solution():
         if len(item)>maxlength:
             itemmax=item
             maxlength=len(item)
-    logging.info('P={} has {} solutions: {}'.format(itemmax[0][0],len(itemmax),itemmax))
+    logging.debug('P={} has {} solutions: {}'.format(itemmax[0][0],len(itemmax),itemmax))
     return (itemmax[0][0])
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution=solution()
     assert (solution==840)
     logging.info('Solution = {}'.format(solution))

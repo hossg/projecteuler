@@ -99,14 +99,14 @@ def solution():
     i = primes.index(maxSequence[0])                            # Now let's also get the actual primes that combine
     primeSequence = [p for p in primes[i:i + len(maxSequence)]] # to give us that largest prime sequence total.
 
-    logging.info('Prime {} is the sum of {} primes starting at {}, has items: {}.'.format(solution, len(primeSequence),
+    logging.debug('Prime {} is the sum of {} primes starting at {}, has items: {}.'.format(solution, len(primeSequence),
                                                                                           maxSequence[0],primeSequence))
 
     return solution
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

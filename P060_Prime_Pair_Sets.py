@@ -69,7 +69,7 @@ def isprime_combinations(primes, sieved_primes):
 
 
 def __get_primes(max_prime):
-    logging.info("Generating primes")
+    logging.debug("Generating primes")
     num_elements_in_set = 5
     max_prime_in_set = 9999
     max_prime = concat(max_prime_in_set, max_prime_in_set)
@@ -145,7 +145,7 @@ def solution():
                                     if is_prime_pair(a, e) and is_prime_pair(b, e) and is_prime_pair(c,
                                                                                                      e) and is_prime_pair(
                                             d, e):
-                                        logging.info('Potential solution: {} made up of {}'.format((a + b + c + d + e),
+                                        logging.debug('Potential solution: {} made up of {}'.format((a + b + c + d + e),
                                                                                                    (a, b, c, d, e)))
                                         potential_solutions.append(a + b + c + d + e)
     return min(potential_solutions)
@@ -190,7 +190,7 @@ def getsysteminfo():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging = logging.getLogger(os.path.basename(__file__))
     stopwatch()  # start timing
     solution = solution()

@@ -5,7 +5,7 @@
 # Note: as 1! = 1 and 2! = 2 are not sums they are not included.
 
 import math, logging
-
+expectedAnswer = 40730
 def sumOfDigitFactorial(n):
     s=str(n)
     total = 0

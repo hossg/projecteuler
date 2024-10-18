@@ -39,7 +39,7 @@ def solution():
         n, nd = d
         a= fraction_add_1(n, nd)
         if len(str(a[0])) > len(str(a[1])):
-            logging.info('{}: {}/{}'.format(i,a[0],a[1]))
+            logging.debug('{}: {}/{}'.format(i,a[0],a[1]))
             solution += 1
         d=fraction_divide_21d(d[0],d[1])
 
@@ -72,7 +72,7 @@ def getsysteminfo():
         (p,memory,cpuc,cpup,cpuf,cput)
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
     stopwatch() #start timing
     solution = solution()

@@ -83,7 +83,7 @@ def solution():
         primes = primebags[k]
         for p1,p2,p3 in itertools.combinations(primes, 3):
             if (p3-p2)==(p2-p1):
-                logging.info('Found primes: {}, {}, {} which are {} apart.'.format(p1,p2,p3,p2-p1))
+                logging.debug('Found primes: {}, {}, {} which are {} apart.'.format(p1,p2,p3,p2-p1))
                 if p1!=1487:
                     solution=str(p1)+str(p2)+str(p3)
                     break
@@ -94,7 +94,7 @@ def solution():
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     stopwatch() #start timing
     solution = solution()
     timetaken=stopwatch() #stop timing

@@ -9,27 +9,31 @@
 #
 # Find the difference between the sum of the squares of the first one hundred natural numbers and the square
 # of the sum.
+expectedAnswer = 25164150
 import os
 import logging
-logger=logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
+logger = logging.getLogger(os.path.basename(__file__))
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+
 
 def sumSquareDifference(n):
-    sumSquares, sum = 0,0
+    sumSquares, sum = 0, 0
 
-    for i in range(n+1):
-        sumSquares += pow(i,2)
+    for i in range(n + 1):
+        sumSquares += pow(i, 2)
         sum += i
-    squareSums=pow(sum,2)
+    squareSums = pow(sum, 2)
 
     return squareSums - sumSquares
 
+
 def solution():
     ssd100 = sumSquareDifference(100)
-    assert(ssd100 == 25164150)
+    assert (ssd100 == 25164150)
     logger.info('solution = {}'.format(ssd100))
     return ssd100
-
 
 
 if __name__ == "__main__":

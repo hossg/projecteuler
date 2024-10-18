@@ -150,7 +150,7 @@ def play(hand1, hand2):
         return False
 
     if (one[0]!='High card'):
-        logging.info('MATCHED HANDS: player one: {}, player two: {}'.format(hand1, hand2))
+        logging.debug('MATCHED HANDS: player one: {}, player two: {}'.format(hand1, hand2))
     # now if the ranks are the same, we need to see which scores higher
 
     if type(one[2] == list):
@@ -191,19 +191,19 @@ def solution():
         rounds = list(reader)
         player1 = [i[0:5] for i in rounds]
         player2 = [i[5:] for i in rounds]
-        logging.info('Playing {} rounds'.format(len(rounds)))
+        logging.debug('Playing {} rounds'.format(len(rounds)))
 
 
     for i in range(len(player1)):
 
         if play(player1[i],player2[i]):
             player1Wins+=1
-            logging.info('ROUND {}: Player 1 {} beats Player 2 {} '.format(i+1,rank(player1[i]), rank(player2[i])))
+            logging.debug('ROUND {}: Player 1 {} beats Player 2 {} '.format(i+1,rank(player1[i]), rank(player2[i])))
         else:
             player2Wins+=1
-            logging.info('ROUND {}: Player 1 {} loses Player 2 {} '.format(i+1,rank(player1[i]), rank(player2[i])))
+            logging.debug('ROUND {}: Player 1 {} loses Player 2 {} '.format(i+1,rank(player1[i]), rank(player2[i])))
 
-    logging.info('Player 1 wins {} rounds, Player 2 wins {} rounds'.format(player1Wins,player2Wins))
+    logging.debug('Player 1 wins {} rounds, Player 2 wins {} rounds'.format(player1Wins,player2Wins))
     assert(player1Wins+player2Wins == len(rounds))
 
     return player1Wins

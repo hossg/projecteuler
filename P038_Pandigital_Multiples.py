@@ -13,7 +13,7 @@
 # (1,2, ... , n) where n > 1?
 
 import logging
-
+expectedAnswer=932718654
 def concatenatedProduct(n,m):
     s =''
     for i in range(1,m+1):
@@ -43,15 +43,15 @@ def solution():
             x=concatenatedProduct(n,m)
             if is9DigitPandigital(x):
                 i=int(x)
-                logging.info('({},{}) -> {}'.format(n, m, x))
+                logging.debug('({},{}) -> {}'.format(n, m, x))
                 if i>currentHighestSolution:
                     currentHighestSolution=i
     return currentHighestSolution
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     solution=solution()
     assert (solution==932718654)
-    logging.info('Solution = {}'.format(solution))
+    logging.debug('Solution = {}'.format(solution))
 
 

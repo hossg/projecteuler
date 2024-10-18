@@ -14,6 +14,8 @@
 
 import math, logging
 
+expectedAnswer=100
+
 def digits(n):
     n2 = n % 10
     n1 = int((n - n2)/10)
