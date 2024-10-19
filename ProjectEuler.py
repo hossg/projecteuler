@@ -30,7 +30,7 @@ s=input('What problem do you want to start with? Enter number: ')
 n=int(s)
 
 # modules = ['P025_1000-Digit_Fibonacci_number', 'P001_MultiplesOf3and5']
-for m in modules[n:]:
+for m in modules[n-1:]:
     logger.info(f"Loading module: {m}")
     f = __import__(m)
     expectedAnswer = f.expectedAnswer
