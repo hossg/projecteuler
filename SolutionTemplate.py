@@ -3,7 +3,7 @@
 # Put the expected answer here
 expectedAnswer=123456789
 
-import logging
+import logging,os
 
 # This function calculates the answer and returns it
 def solution():
