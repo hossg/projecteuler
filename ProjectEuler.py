@@ -9,10 +9,10 @@ import re
 import glob
 
 logger = logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 logger.info('Project Euler - Project Runner')
+
 # get the list of files to play with and sort them numerically rather than alphabetically
 files = glob.glob("P0*.py")
 logger.info("Found {} problems to run".format(len(files)))
@@ -21,10 +21,7 @@ modules = []
 for k, i in enumerate(files):
     j = i.split(sep='.')
     modules.append(j[0])
-
 modules = sorted(modules)
-# for m in modules:
-#     print(m)
 
 incorrectString = '\x1b[31;1mINCORRECT\x1b[0m'
 correctString = '\x1b[32;1mCORRECT\x1b[0m'

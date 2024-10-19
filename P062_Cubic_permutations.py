@@ -4,7 +4,7 @@
 # Find the smallest cube for which exactly five permutations of its digits are cube.
 
 # put the expected answer here
-expectedAnswer=123456789
+expectedAnswer=127035954683
 
 import logging, math, timeit, time, psutil, platform, os
 

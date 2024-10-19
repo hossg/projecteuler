@@ -2,7 +2,7 @@
 from functools import lru_cache
 import logging
 
-expectedAnswer = 1234567
+expectedAnswer = 272
 
 # 2,1,2,1,1,4,1,1,6,1,1,8,1,1,10,1,1,12,1,1,14,1,1,16,
 def continued_fraction_of_e(k):
@@ -61,6 +61,7 @@ def solution():
     logging.debug(convergent_denominators)
     logging.debug(convergent_p(a0, tuple(ai), 9))
     logging.debug(digit_sum(convergent_p(a0, tuple(ai), 99)))
+    return digit_sum(convergent_p(a0, tuple(ai), 99))
 
 
 def digit_sum(n):
