@@ -15,7 +15,7 @@ def read_triangle_file(file_path):
 
 
 # Reading the file '0067_triangle.txt' and printing the result
-file_path = '0067_triangle.txt'
+file_path = 'p067_triangle.txt'
 triangle_data = read_triangle_file(file_path)
 
 

@@ -27,7 +27,7 @@ incorrectString = '\x1b[31;1mINCORRECT\x1b[0m'
 correctString = '\x1b[32;1mCORRECT\x1b[0m'
 
 # modules = ['P025_1000-Digit_Fibonacci_number', 'P001_MultiplesOf3and5']
-for m in modules[58:]:
+for m in modules[65:]:
     logger.info(f"Loading module: {m}")
     f = __import__(m)
     expectedAnswer = f.expectedAnswer
