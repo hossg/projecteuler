@@ -36,9 +36,12 @@ def solution():
                 s = score(v) * (i+1)        # enumerate will return zero-based index
                 totalscore+=s
 
-            logger.info('solution ={}'.format(totalscore))
-            assert(totalscore==871198282)
+
             return totalscore
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

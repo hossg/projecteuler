@@ -67,10 +67,13 @@ def sumAllRows(rows):
 
 def solution():
     maxPath = sumAllRows(rows)
-    assert (maxPath == 1074)
-    logger.info('solution = {}'.format(maxPath))
+
     return maxPath
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

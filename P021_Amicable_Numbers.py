@@ -50,9 +50,12 @@ def solution():
     setOfAmicableNumbers=set(amicableNumbers) # to remove the duplicates, i.e. the "reverse pairs"
     s = sum(setOfAmicableNumbers)
     logger.debug(setOfAmicableNumbers)
-    logger.info('solution = {}'.format(s))
-    assert(s==31626)
+
     return s
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

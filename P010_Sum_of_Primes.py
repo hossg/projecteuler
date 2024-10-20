@@ -18,7 +18,7 @@ prime = __import__("P007_10001_Primes")
 
 def solution():
     logger.error("shortcutting solution")
-    return 142913828922
+    return 0 #142913828922
     primes = prime.getPrimesLessThan(
         2000000
     )  #TODO - could look at prime sieve implementation from Problem 27 which has superior performance
@@ -30,4 +30,8 @@ def solution():
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

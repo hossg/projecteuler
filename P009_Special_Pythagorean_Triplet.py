@@ -30,9 +30,13 @@ def solution():
             if (a2 + b2) == c2:
                 s = a * b * c
                 assert ((s) == 31875000)
-                logger.info('solution = {}'.format(s))
+                logger.debug('solution = {}'.format(s))
                 return s
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

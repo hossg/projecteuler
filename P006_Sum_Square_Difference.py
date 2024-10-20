@@ -13,9 +13,6 @@ expectedAnswer = 25164150
 import os
 import logging
 
-logger = logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 
 def sumSquareDifference(n):
@@ -31,10 +28,12 @@ def sumSquareDifference(n):
 
 def solution():
     ssd100 = sumSquareDifference(100)
-    assert (ssd100 == 25164150)
-    logger.info('solution = {}'.format(ssd100))
     return ssd100
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

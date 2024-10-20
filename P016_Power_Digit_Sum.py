@@ -18,10 +18,13 @@ def solution():
     digitSum = 0
     for d in s:
         digitSum += int(d)
-    assert (digitSum == 1366)
-    logger.info('solution = {}'.format(digitSum))
+
     return digitSum
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

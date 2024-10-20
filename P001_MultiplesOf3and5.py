@@ -7,11 +7,6 @@ import os
 import logging
 import timeit
 
-logger = logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO,
-                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
-
-
 def yieldNextMultipleOf3or5():
     candidate = 0
     while True:
@@ -38,6 +33,9 @@ def solution():
 expectedAnswer = 233168
 
 if __name__ == "__main__":
+    logger = logging.getLogger(os.path.basename(__file__))
+    logging.basicConfig(level=logging.INFO,
+                        format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logger.info("Solution = {}".format(solution()))
     n = 10000
     t = timeit.timeit('solution()', number=n, globals=globals())

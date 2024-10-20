@@ -61,10 +61,13 @@ def solution():
         l = len(d)
         logger.debug("{} : {}, {}".format(t, l, divisors(t)))
         if l > 500:
-            assert (t == 76576500)
-            logger.info('solution = '.format(t))
+
             return t
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

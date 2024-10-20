@@ -118,7 +118,7 @@ def solution():
     logging.info("Result: n={} produces {} consecutive primes at (a,b)=({},{})".format(maxPrimeN,maxPrimeSequence, maxPrimeA, maxPrimeB))
 
     result = maxPrimeA*maxPrimeB
-    assert result == -59231
+
 
     return result
 
@@ -129,5 +129,8 @@ def f(a, b, n):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

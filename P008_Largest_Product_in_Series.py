@@ -76,10 +76,14 @@ def maxProduct(string, length):
 def solution():
     assert (maxProduct(thousandDigits, 4) == 5832)
     s = maxProduct(thousandDigits, 13)
-    assert (s == 23514624000)
-    logger.info("solution = {}".format(s))
+
+    logger.debug("solution = {}".format(s))
     return s
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

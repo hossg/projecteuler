@@ -85,11 +85,13 @@ def solution():
     #Then strip out all of the spaces
     s = [c for c in s if c != ' ']
     sol = len(s)
-    assert (sol == 21124)
 
-    logger.info('solution = {}'.format(sol))
     return sol
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

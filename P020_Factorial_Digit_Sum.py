@@ -22,10 +22,13 @@ def solution():
     sum = 0
     for c in s:
         sum += int(c)
-    assert (sum == 648)
-    logger.info('solution = {}'.format(sum))
+
     return sum
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

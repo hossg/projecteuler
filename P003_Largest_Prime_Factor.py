@@ -20,7 +20,6 @@ logger = logging.getLogger(os.path.basename(__file__))
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
-
 def isFactor(N, n):
     if N % n == 0:
         return True
@@ -45,10 +44,14 @@ def factorize(N, startFrom=2):
 def solution():
     factors = factorize(600851475143)
     m = max(factors)
-    logger.info("solution = {}".format(m))
+    logger.debug("solution = {}".format(m))
     assert (m == 6857)
     return m
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

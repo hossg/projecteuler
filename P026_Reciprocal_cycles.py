@@ -28,7 +28,7 @@ def solution():
         logger.debug("{} - {}".format(i,l))
         if l > max:
             max = i
-    logger.info("solution = {}".format(max))
+
     return max
 
 
@@ -45,4 +45,7 @@ def recurringCycle(d):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    solution()
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

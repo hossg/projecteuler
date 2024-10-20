@@ -44,8 +44,7 @@ def getFirstNDigitFibonacci(N):
 
 def solution():
     solution = getFirstNDigitFibonacci(1000)
-    assert (solution[0] == 4782)
-    logger.info("solution = {}".format(solution[0]))
+
     return (solution[0])
 
 
@@ -55,7 +54,9 @@ def time():
     m = "{} iterations completed in {:0.2f}s".format(i, t)
     logger.info(m)
 
-
 if __name__ == "__main__":
-    solution()
-    time()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

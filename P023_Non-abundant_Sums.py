@@ -53,9 +53,12 @@ def solution():
     # now build a list that doesn't include those abundant composites
     nonAbundantComposites=[c for c in range(1,limit) if c not in abundantComposites]
     sumOfNonAbundantComposites = sum(nonAbundantComposites)
-    logger.info('solution = {}'.format(sumOfNonAbundantComposites))
-    assert(sumOfNonAbundantComposites==4179871)
+
     return sumOfNonAbundantComposites
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

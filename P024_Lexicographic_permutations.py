@@ -19,10 +19,12 @@ def solution():
     s='0123456789'
     m=(next(itertools.islice(itertools.permutations(s, 10),999999,1000000))) # items are zero-based, so we want item 999999
     ms=''.join(m)
-    logger.info('solution = {}'.format(ms))
-    assert(ms=='2783915460')
+
     return ms
 
-
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

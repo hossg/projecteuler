@@ -80,10 +80,13 @@ def solution():
     #we need to calculate the number of 1st Sundays in an intermediate range, i.e. subtract off those
     # that occured in 1900 itself in order to answer the question
     sol = count2000 - count1900
-    assert (sol == 171)
-    logger.info('solution = {}'.format(sol))
+
     return sol
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

@@ -43,13 +43,17 @@ def solution():
         logger.debug("{} : {} terms".format(
             i, l))  # disabled for large runs for performance reasons
 
-    logger.info("max sequence length: collatz({}): {} items".format(
+    logger.debug("max sequence length: collatz({}): {} items".format(
         maxSequence[0], maxSequence[1]))
-    assert (maxSequence[0] == 837799)
+
     return maxSequence[0]
 
 
 # TODO - need to benchmark this (and all other solutions) and compare with canonical versions available elsewhere
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

@@ -20,10 +20,13 @@ logging.basicConfig(level=logging.INFO,
 #TODO - need to implement a generic routine here
 def solution():
     x = 2 * 3 * 5 * 7 * 11 * 13 * 17 * 19 * 2 * 2 * 2 * 3
-    logger.info("solution = {}".format(x))
-    assert (x == 232792560)
+
     return x
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

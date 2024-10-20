@@ -38,10 +38,13 @@ def solution():
         else:
             break
 
-    logger.info("solution = {} ".format(total))
-    assert (total == 4613732)
+
     return total
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)

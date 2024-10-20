@@ -217,10 +217,13 @@ numbers = [
 def solution():
     n = sum(numbers)
     s = str(n)[0:10]
-    assert (s == str(5537376230))
-    logger.info('solution = {}'.format(s))
+
     return int(s)
 
 
 if __name__ == "__main__":
-    solution()
+    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging=logging.getLogger(os.path.basename(__file__))
+    solution = solution()
+    logging.info('Solution = {}'.format(solution))
+    assert (solution == expectedAnswer)
