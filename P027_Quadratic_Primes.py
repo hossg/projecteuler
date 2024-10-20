@@ -60,6 +60,7 @@ def getBooleanPrimesLessThan(stop):
         if val is True:
             primes[ind*2::ind] = [False] * (((stop - 1)//ind) - 1)
             L.append(ind)
+    # logging.debug(L)
     return primes
 
 
@@ -129,8 +130,10 @@ def f(a, b, n):
 
 
 if __name__ == "__main__":
+
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
+    # logging.debug(getBooleanPrimesLessThan(20))
     solution = solution()
     logging.info('Solution = {}'.format(solution))
     assert (solution == expectedAnswer)
