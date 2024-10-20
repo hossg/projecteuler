@@ -11,22 +11,16 @@ logger = logging.getLogger(os.path.basename(__file__))
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
-# THIS TAKES A LONG TIME TO RUN!
-
-prime = __import__("P007_10001_Primes")
-
+import P027_Quadratic_Primes as prime2
 
 def solution():
-    logger.error("shortcutting solution")
-    return 0 #142913828922
-    primes = prime.getPrimesLessThan(
-        2000000
-    )  #TODO - could look at prime sieve implementation from Problem 27 which has superior performance
+    primes2 = prime2.getBooleanPrimesLessThan(2000000)
+    runningsum = 0
+    for i in range(len(primes2)):
+        if primes2[i]: runningsum += i
 
-    twomsum = sum(primes)
-    assert (twomsum == 142913828922)
-    logger.info("solution = {}".format(twosum))
-    return twosum
+    logging.debug(f'boolean approach: {runningsum}')
+    return runningsum
 
 
 if __name__ == "__main__":
