@@ -16,7 +16,6 @@
 # Find the product of the coefficients, a and  b , for the quadratic expression that produces the maximum number of
 # primes for consecutive values of n, starting with n=0.0
 
-
 # Approach/notable constraints on the ranges of the various parameters:
 #
 # First, we need consecutive primes from n=0, so as soon as we get a non-prime, we can move onto the next value of a,b
@@ -33,13 +32,12 @@ import logging, os, math
 
 expectedAnswer = -59231
 
+
 def getPrimesLessThan(N):
 
+    candidates = [2] + [c for c in range(3, N, 2)]
 
-    candidates =  [2] + [c for c in range(3,N,2)]
-
-
-    for n in range(3,int(math.sqrt(N))+1):
+    for n in range(3, int(math.sqrt(N)) + 1):
         #print(candidates)   # show the reducing set of candidates
         for c in candidates:
             if c != n and c % n == 0:
@@ -58,11 +56,10 @@ def getBooleanPrimesLessThan(stop):
     L = []
     for ind, val in enumerate(primes):
         if val is True:
-            primes[ind*2::ind] = [False] * (((stop - 1)//ind) - 1)
+            primes[ind * 2::ind] = [False] * (((stop - 1) // ind) - 1)
             L.append(ind)
     # logging.debug(L)
     return primes
-
 
 
 def solution():
@@ -72,67 +69,73 @@ def solution():
     maxB = 1000
     minB = 2  # Follows from constraint 2, b must be a positive prime
 
-    m = f(maxA,maxB,500)
+    m = f(maxA, maxB, 500)
 
     logging.debug("Max possible prime is below {}".format(m))
     logging.debug("Finding all possible primes below {}".format(m))
-    primes = getBooleanPrimesLessThan(m)   # all the primes we need to test against
+    primes = getBooleanPrimesLessThan(
+        m)  # all the primes we need to test against
 
     logging.debug("Initializing counters")
-    maxPrimeSequence=0
-    currentMaxPrimeSequence=0
-    maxPrimeN=0
-    maxPrimeA=0
-    maxPrimeB=0
+    maxPrimeSequence = 0
+    currentMaxPrimeSequence = 0
+    maxPrimeN = 0
+    maxPrimeA = 0
+    maxPrimeB = 0
 
-    logging.debug("Scanning from (a,b)=({},{}) to (a,b)]({},{})".format(minA,minB,maxA,maxB))
+    logging.debug("Scanning from (a,b)=({},{}) to (a,b)]({},{})".format(
+        minA, minB, maxA, maxB))
 
-
-    for a in range(minA,maxA+1):
+    for a in range(minA, maxA + 1):
         startB = minB
-        if a<0:
-            startB = -a # see constraint 2
-        for b in range(startB,maxB+1):
+        if a < 0:
+            startB = -a  # see constraint 2
+        for b in range(startB, maxB + 1):
             if primes[b] == False:
                 continue
-            logging.debug("Checking {},{}".format(a,b))
+            logging.debug("Checking {},{}".format(a, b))
 
             limit = b
-            for n in range (limit):
-                c=f(a,b,n)
+            for n in range(limit):
+                c = f(a, b, n)
 
-                if(c>0):
+                if (c > 0):
                     if primes[c] == True:
-                        logging.debug("Found prime ({},{}),{}: ".format(a,b,n))
+                        logging.debug("Found prime ({},{}),{}: ".format(
+                            a, b, n))
                         currentMaxPrimeSequence += 1
                         if currentMaxPrimeSequence > maxPrimeSequence:
-                            maxPrimeSequence=currentMaxPrimeSequence
-                            maxPrimeN=n
-                            maxPrimeA=a
-                            maxPrimeB=b
-                            logging.debug("New longest sequence of primes: n={}, {} long sequemce".format(n,maxPrimeSequence))
+                            maxPrimeSequence = currentMaxPrimeSequence
+                            maxPrimeN = n
+                            maxPrimeA = a
+                            maxPrimeB = b
+                            logging.debug(
+                                "New longest sequence of primes: n={}, {} long sequemce"
+                                .format(n, maxPrimeSequence))
                     else:
-                        currentMaxPrimeSequence=0
-                        break   # Follows from constraint 1 - as soon as we hit a non-prime, we can move to the next a,b
-            currentMaxPrimeSequence=0
+                        currentMaxPrimeSequence = 0
+                        break  # Follows from constraint 1 - as soon as we hit a non-prime, we can move to the next a,b
+            currentMaxPrimeSequence = 0
 
-    logging.info("Result: n={} produces {} consecutive primes at (a,b)=({},{})".format(maxPrimeN,maxPrimeSequence, maxPrimeA, maxPrimeB))
+    logging.debug(
+        "Result: n={} produces {} consecutive primes at (a,b)=({},{})".format(
+            maxPrimeN, maxPrimeSequence, maxPrimeA, maxPrimeB))
 
-    result = maxPrimeA*maxPrimeB
-
+    result = maxPrimeA * maxPrimeB
 
     return result
 
+
 def f(a, b, n):
-    return ((pow(n, 2) + a*n) + b)
-
-
+    return ((pow(n, 2) + a * n) + b)
 
 
 if __name__ == "__main__":
 
-    logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    logging=logging.getLogger(os.path.basename(__file__))
+    logging.basicConfig(
+        level=logging.DEBUG,
+        format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging = logging.getLogger(os.path.basename(__file__))
     # logging.debug(getBooleanPrimesLessThan(20))
     solution = solution()
     logging.info('Solution = {}'.format(solution))
