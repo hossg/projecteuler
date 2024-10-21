@@ -7,9 +7,12 @@ import os
 import logging
 import re
 import glob
+from tqdm import tqdm
+from tqdm.contrib.logging import logging_redirect_tqdm
 
 logger = logging.getLogger(os.path.basename(__file__))
-logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s %(levelname)s %(name)s %(message)s')
 
 logger.info('Project Euler - Project Runner')
 
@@ -26,15 +29,16 @@ modules = sorted(modules)
 incorrectString = '\x1b[31;1mINCORRECT\x1b[0m'
 correctString = '\x1b[32;1mCORRECT\x1b[0m'
 
-s=input('What problem do you want to start with? Enter number: ')
-n=int(s)
+s = input('What problem do you want to start with? Enter number: ')
+n = int(s)
 
-# modules = ['P025_1000-Digit_Fibonacci_number', 'P001_MultiplesOf3and5']
-for m in modules[n-1:]:
-    logger.info(f"Loading module: {m}")
-    f = __import__(m)
-    expectedAnswer = f.expectedAnswer
-    solution = f.solution()
-    logger.info(
-        f"Solution to {m} = {solution} {correctString if solution == expectedAnswer else incorrectString}"
-    )
+with logging_redirect_tqdm():
+    # modules = ['P025_1000-Digit_Fibonacci_number', 'P001_MultiplesOf3and5']
+    for m in tqdm(modules[n - 1:]):
+        logger.info(f"Loading module: {m}")
+        f = __import__(m)
+        expectedAnswer = f.expectedAnswer
+        solution = f.solution()
+        logger.info(
+            f"Solution to {m} = {solution} {correctString if solution == expectedAnswer else incorrectString}"
+        )

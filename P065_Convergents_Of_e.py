@@ -4,6 +4,7 @@ import logging
 
 expectedAnswer = 272
 
+
 # 2,1,2,1,1,4,1,1,6,1,1,8,1,1,10,1,1,12,1,1,14,1,1,16,
 def continued_fraction_of_e(k):
     if k == 0:
@@ -40,6 +41,7 @@ def convergent_p(a0, ai, k):
     return p
 
 
+@lru_cache(None)
 def convergent_q(a0, ai, k):
     if k == 0: q = 1
     elif k == 1: q = ai[0]
@@ -71,16 +73,16 @@ def digit_sum(n):
         sum += int(c)
     return sum
 
+
 if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s %(levelname)s %(name)s %(message)s')
-    logging=logging.getLogger(os.path.basename(__file__))
-    stopwatch() #start timing
+    logging.basicConfig(
+        level=logging.INFO,
+        format='%(asctime)s %(levelname)s %(name)s %(message)s')
+    logging = logging.getLogger(os.path.basename(__file__))
+    stopwatch()  #start timing
     solution = solution()
-    timetaken=stopwatch() #stop timing
+    timetaken = stopwatch()  #stop timing
     #assert (solution == expectedAnswer)
     logging.info('Solution = {}'.format(solution))
     logging.info(timetaken)
     logging.info('System info: {}'.format(getsysteminfo()))
-
-
-
