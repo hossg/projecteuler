@@ -7,18 +7,13 @@ import logging,os
 
 # This function calculates the answer and returns it
 def solution():
-    # just a placeholder for where the solution to the problem will be stored and then returned
-    solution=987654321
 
-    #implement solution to the problem here
-    time.sleep(1)
-
-    return solution
+    return 123456789
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(levelname)s %(name)s %(message)s')
     logging=logging.getLogger(os.path.basename(__file__))
-    solution = solution()
-    logging.info('Solution = {}'.format(solution))
-    assert (solution == expectedAnswer)
+    sol = solution()
+    logging.info('Solution = {}'.format(sol))
+    assert (sol == expectedAnswer)
     
